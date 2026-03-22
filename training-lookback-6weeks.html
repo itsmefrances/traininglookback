@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frances Angulo — 6-Week Training Lookback</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background-color: #0f0f0f;
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #00bcd4;
+            box-shadow: 0 0 16px rgba(0, 188, 212, 0.15);
+        }
+
+        .stat-card.strength {
+            border-left: 4px solid #ce93d8;
+        }
+
+        .stat-card h3 {
+            font-size: 0.85em;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .stat-card .value {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+
+        .stat-card.strength .value {
+            color: #ce93d8;
+        }
+
+        .volume-card {
+            grid-column: span 1;
+        }
+
+        @media (max-width: 768px) {
+            .volume-card {
+                grid-column: span 1;
+            }
+            .hero h1 {
+                font-size: 1.6em;
+            }
+        }
+
+        /* INTENSITY STACKED BAR */
+        .intensity-bar {
+            display: flex;
+            height: 40px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .intensity-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75em;
+            font-weight: 600;
+            color: #000;
+            transition: flex 0.3s ease;
+        }
+
+        .intensity-segment.sprint {
+            background-color: #f48fb1;
+            flex: 10;
+        }
+
+        .intensity-segment.threshold {
+            background-color: #ff9800;
+            flex: 22;
+        }
+
+        .intensity-segment.endurance {
+            background-color: #81c784;
+            flex: 68;
+        }
+
+        /* WEEK SECTION */
+        .week {
+            margin-bottom: 50px;
+        }
+
+        .week h2 {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            color: #00bcd4;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+        }
+
+        .week-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #333;
+            margin-bottom: 24px;
+        }
+
+        .week-table th {
+            background-color: #252525;
+            padding: 14px;
+            text-align: left;
+            font-weight: 600;
+            color: #00bcd4;
+            border-bottom: 2px solid #333;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .week-table td {
+            padding: 16px 14px;
+            border-bottom: 1px solid #2a2a2a;
+            vertical-align: top;
+        }
+
+        .week-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .day-cell {
+            font-weight: 600;
+            color: #fff;
+            min-width: 80px;
+        }
+
+        .training-cell {
+            color: #e0e0e0;
+        }
+
+        .description-cell {
+            color: #999;
+            font-size: 0.95em;
+        }
+
+        /* ACTIVITY TAGS */
+        .activity-tag {
+            display: inline-block;
+            font-weight: 600;
+            font-size: 0.75em;
+            padding: 3px 8px;
+            border-radius: 3px;
+            margin-right: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-rowing {
+            background-color: rgba(0, 188, 212, 0.2);
+            color: #00bcd4;
+            border: 1px solid #00bcd4;
+        }
+
+        .tag-crossfit {
+            background-color: rgba(255, 152, 0, 0.2);
+            color: #ff9800;
+            border: 1px solid #ff9800;
+        }
+
+        .tag-strength {
+            background-color: rgba(206, 147, 216, 0.2);
+            color: #ce93d8;
+            border: 1px solid #ce93d8;
+        }
+
+        .tag-open {
+            background-color: rgba(244, 143, 177, 0.2);
+            color: #f48fb1;
+            border: 1px solid #f48fb1;
+        }
+
+        /* C2 LINK */
+        .c2-link {
+            display: inline-block;
+            margin-left: 6px;
+            padding: 2px 6px;
+            background-color: rgba(0, 188, 212, 0.15);
+            color: #00bcd4;
+            text-decoration: none;
+            border-radius: 2px;
+            font-size: 0.75em;
+            font-weight: 600;
+            border: 1px solid rgba(0, 188, 212, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .c2-link:hover {
+            background-color: rgba(0, 188, 212, 0.25);
+            box-shadow: 0 0 8px rgba(0, 188, 212, 0.2);
+        }
+
+        /* COACH NOTES */
+        .coach-notes {
+            background: linear-gradient(135deg, #1a1a1a 0%, #1f1f1f 100%);
+            border-left: 4px solid #00bcd4;
+            border-radius: 8px;
+            padding: 28px;
+            margin: 50px 0 40px 0;
+            border: 1px solid #333;
+        }
+
+        .coach-notes h2 {
+            color: #00bcd4;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .coach-notes p {
+            margin-bottom: 12px;
+            color: #d0d0d0;
+            line-height: 1.7;
+        }
+
+        .coach-notes strong {
+            color: #00bcd4;
+        }
+
+        /* EXAMPLES SECTION */
+        .examples {
+            margin-top: 50px;
+        }
+
+        .examples h2 {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            color: #00bcd4;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+        }
+
+        .example {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 28px;
+            margin-bottom: 28px;
+            border-left: 4px solid #00bcd4;
+        }
+
+        .example h3 {
+            color: #00bcd4;
+            margin-bottom: 16px;
+            font-size: 1.1em;
+        }
+
+        .example p {
+            color: #999;
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+
+        .chart-container {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 16px;
+            margin-top: 16px;
+            overflow-x: auto;
+        }
+
+        /* REST DAYS */
+        .rest-day {
+            background-color: rgba(100, 100, 100, 0.1);
+        }
+
+        .rest-day .day-cell {
+            color: #666;
+        }
+
+        .rest-day .training-cell {
+            color: #666;
+            font-style: italic;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+
+            .hero h1 {
+                font-size: 1.4em;
+            }
+
+            .stat-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 12px;
+            }
+
+            .stat-card {
+                padding: 14px;
+            }
+
+            .stat-card h3 {
+                font-size: 0.75em;
+            }
+
+            .stat-card .value {
+                font-size: 1em;
+            }
+
+            .week-table th,
+            .week-table td {
+                padding: 10px 8px;
+                font-size: 0.9em;
+            }
+
+            .coach-notes,
+            .example {
+                padding: 16px;
+            }
+
+            .activity-tag {
+                font-size: 0.7em;
+                padding: 2px 6px;
+                margin-right: 6px;
+            }
+
+            .c2-link {
+                font-size: 0.7em;
+                padding: 1px 4px;
+                margin-left: 4px;
+            }
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            color: #555;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 0.85em;
+        }
+
+        .footer a {
+            color: #00bcd4;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HERO SECTION -->
+        <div class="hero">
+            <h1>Frances Angulo — 6-Week Training Lookback</h1>
+            <p style="color: #888; font-size: 0.95em; margin-bottom: 32px;">Feb 9 – Mar 22, 2026</p>
+
+            <!-- ROWING PBs -->
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <h3>500m PB</h3>
+                    <div class="value">1:39.9</div>
+                    <div style="font-size: 0.75em; color: #666; margin-top: 6px;">312W</div>
+                </div>
+                <div class="stat-card">
+                    <h3>1000m PB</h3>
+                    <div class="value">3:43.0</div>
+                    <div style="font-size: 0.75em; color: #666; margin-top: 6px;">Set Feb 28</div>
+                </div>
+                <div class="stat-card">
+                    <h3>5K PB</h3>
+                    <div class="value">20:54.7</div>
+                    <div style="font-size: 0.75em; color: #666; margin-top: 6px;">2:05.5 split</div>
+                </div>
+                <div class="stat-card">
+                    <h3>1-Min Best</h3>
+                    <div class="value">317m</div>
+                    <div style="font-size: 0.75em; color: #666; margin-top: 6px;">Max effort</div>
+                </div>
+            </div>
+
+            <!-- STRENGTH PRs -->
+            <div class="stat-grid">
+                <div class="stat-card strength">
+                    <h3>Back Squat</h3>
+                    <div class="value">1RM: 220</div>
+                    <div style="font-size: 0.75em; color: #999; margin-top: 6px;">3RM: 200</div>
+                </div>
+                <div class="stat-card strength">
+                    <h3>Front Squat</h3>
+                    <div class="value">1RM: 185</div>
+                    <div style="font-size: 0.75em; color: #999; margin-top: 6px;">3RM: 165</div>
+                </div>
+                <div class="stat-card strength">
+                    <h3>Deadlift</h3>
+                    <div class="value">1RM: 275</div>
+                    <div style="font-size: 0.75em; color: #999; margin-top: 6px;">5RM: 245</div>
+                </div>
+                <div class="stat-card strength">
+                    <h3>Bench Press</h3>
+                    <div class="value">1RM: 130</div>
+                    <div style="font-size: 0.75em; color: #999; margin-top: 6px;">3RM: 117.5</div>
+                </div>
+            </div>
+
+            <!-- VOLUME + INTENSITY -->
+            <div class="stat-grid">
+                <div class="stat-card volume-card">
+                    <h3>Weekly Rowing Volume</h3>
+                    <div class="value" style="font-size: 1.1em;">~28.6k m/wk</div>
+                    <div style="font-size: 0.75em; color: #666; margin-top: 6px;">171.5k total · 44 sessions · ~14h</div>
+                </div>
+                <div class="stat-card volume-card">
+                    <h3>Intensity Distribution</h3>
+                    <div class="intensity-bar">
+                        <div class="intensity-segment sprint">10%</div>
+                        <div class="intensity-segment threshold">22%</div>
+                        <div class="intensity-segment endurance">68%</div>
+                    </div>
+                    <div style="font-size: 0.75em; color: #666; margin-top: 8px;">Sprint · Threshold · Endurance</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEEK 1: FEB 9–14 -->
+        <div class="week">
+            <h2>Week 1: Feb 9–14 (Old Cycle Wk 6 — Test Week)</h2>
+            <table class="week-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Training</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="day-cell">Mon, Feb 9</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-strength">Strength</span>
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            <strong>Strength:</strong> Back Squat build to 1RM. Bench Press build to 1RM.<br>
+                            <strong>Rowing:</strong> 5,000m steady at 2:30/500m (~33% PB). Aerobic, SR 23.
+                            <a href="https://log.concept2.com/profile/2233883/log/112589277" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Tue, Feb 10</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-crossfit">CrossFit</span>
+                        </td>
+                        <td class="description-cell">
+                            Back Squat find 5RM. Bar/Ring MU Practice. WOD: 10-9-8...1 OHS (75/55) + Pull-ups
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Wed, Feb 11</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            12-min warm-up (1,825m) → Sprint power: ~10×25-sec all-out with 2:30 rest. 1,296m at 1:36/500m (~88% PB), SR 47. Short explosive bursts.
+                            <a href="https://log.concept2.com/profile/2233883/log/112643880" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Thu, Feb 12</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-strength">Strength</span>
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            <strong>Strength:</strong> Strict Press build to 1RM → back-off 80% × 5×3. Pullups 5×5-10. Accessory: Bulgarian Split Squats, Side Bends, Hanging Knee Raises.<br>
+                            <strong>Rowing AM:</strong> Sprint intervals — 750m / 500m / 500m / 250m with 5:00 rest. ~1:54/500m (~73% PB), SR 33-35. Descending ladder.
+                            <a href="https://log.concept2.com/profile/2233883/log/112750312" class="c2-link">C2 ↗</a><br>
+                            <strong>Rowing PM:</strong> 5,000m steady at 2:31/500m (~33% PB). Endurance.
+                            <a href="https://log.concept2.com/profile/2233883/log/112779023" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Fri, Feb 13</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-crossfit">CrossFit</span>
+                        </td>
+                        <td class="description-cell">
+                            A1. Dual KB Sumo DL 3×8-10. A2. SA Row 3×8-10/side. A3. Hollow Holds. WOD: 2 Rds: 40 DB Snatch (50/35), 30 Sit-ups, 20 BJO.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Sat, Feb 14</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            15-min warm-up (2,082m) → Threshold: 6×5:00 ON / 1:30 rest. 7,140m at 2:06/500m (~56% PB), SR 27-28. Extremely consistent. Slight negative split on last rep.
+                            <a href="https://log.concept2.com/profile/2233883/log/112851609" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- WEEK 2: FEB 16–21 -->
+        <div class="week">
+            <h2>Week 2: Feb 16–21 (Interim Week — Reset)</h2>
+            <table class="week-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Training</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="day-cell">Mon, Feb 16</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-strength">Strength</span>
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            <strong>Strength:</strong> Interim week strength work.<br>
+                            <strong>Rowing:</strong> Aerobic intervals — 3×2,000m with 1:00 rest. Held 2:24 / 2:26 / 2:27 (~37% PB), SR 22. Even pacing.
+                            <a href="https://log.concept2.com/profile/2233883/log/112954279" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Tue, Feb 17</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-crossfit">CrossFit</span>
+                        </td>
+                        <td class="description-cell">
+                            Back Rack Rev Lunge 4×5-7/side. WOD: 14min AMRAP: T2B, DB Snatches, DB OH Rev Lunges.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Wed, Feb 18</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            12-min warm-up (1,847m) → Sprint power: ~10×25-sec max with 2:30 rest. 637m at 1:34/500m (~92% PB), SR 46-55. Very short, very explosive.
+                            <a href="https://log.concept2.com/profile/2233883/log/112977015" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Thu, Feb 19</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-strength">Strength</span>
+                        </td>
+                        <td class="description-cell">
+                            Interim week strength work.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Fri, Feb 20</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-crossfit">CrossFit</span>
+                        </td>
+                        <td class="description-cell">
+                            Dual KB Swing, 3-Pt DB Row. WOD: 12min AMRAP: 2-4-6-8... Alt DB C&J, DB Box Step Over, Pull-up.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Sat, Feb 21</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            12-min warm-up (1,923m) → Mixed threshold/endurance: 4,494m at 2:22/500m (~39% PB), SR 23.
+                            <a href="https://log.concept2.com/profile/2233883/log/113133886" class="c2-link">C2 ↗</a><br>
+                            Then: 10-min warm-up (1,291m) → Technique/drill: 8-min pull at ~2:17/500m then recovery intervals at low drag (DF 97), SR 18. Stroke feel work.
+                            <a href="https://log.concept2.com/profile/2233883/log/113189188" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- WEEK 3: FEB 23–28 -->
+        <div class="week">
+            <h2>Week 3: Feb 23–28 (New Cycle Week 1 + Open 26.1)</h2>
+            <table class="week-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Training</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="day-cell">Mon, Feb 23</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-strength">Strength</span>
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            <strong>Strength:</strong> Back Squat — heavy 5RM, back-off 70% × 2×10. Accessory: Pushups, DB Row, Side Bends.<br>
+                            <strong>Rowing:</strong> Endurance — 1000m + 4×2000m + 1000m with ~1:00 rest. 10,000m in 54:06 at 2:24/500m (~38% PB), SR 22. HR climbed 59→137. Mostly under VT1 (132).
+                            <a href="https://log.concept2.com/profile/2233883/log/113250724" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Tue, Feb 24</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-crossfit">CrossFit</span>
+                        </td>
+                        <td class="description-cell">
+                            Front Squat 4×4 building. Pendlay Row 4×8-10. WOD: 6 Rds: 9 T2B, 6 Dual KB Squat, 54 DU.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Wed, Feb 25</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            <strong>Sprint:</strong> 12-min warm-up (1,974m, HR 128) → 4×500m with 3:00 rest at ~1:59/500m (~65% PB), SR 29-33, HR avg 154.
+                            <a href="https://log.concept2.com/profile/2233883/log/113301360" class="c2-link">C2 ↗</a><br>
+                            Then: Easy 6-min shakeout (1,240m at 2:25, HR 129) + drill/technique: ~20×20-sec strokes with :30 rest, SR 21, HR at VT1 (132).
+                            <a href="https://log.concept2.com/profile/2233883/log/113352866" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Thu, Feb 26</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-strength">Strength</span>
+                        </td>
+                        <td class="description-cell">
+                            Strict Press — heavy 5RM, back-off 70% × 2×10. Pullups 5×5-10. Accessory: Cyclist Squat, RDL, Plank.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Fri, Feb 27</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-open">CF Open 26.1</span>
+                        </td>
+                        <td class="description-cell">
+                            For time (12min cap): 246 Wall Balls + Box Jump Overs. First Open workout of the season.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Sat, Feb 28</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            <strong>Session 1:</strong> Mixed — 12-min steady pull (1,931m at ~2:29/500m), 4×500m at ~2:00/500m with 2:00 rest (~65% PB, HR 108→137), 12-min endurance pull (2,453m). 6,443m total.
+                            <a href="https://log.concept2.com/profile/2233883/log/113455860" class="c2-link">C2 ↗</a><br>
+                            <strong>Session 2:</strong> 12-min warm-up (1,787m) → Moderate warm-up (2,025m at 2:58) → Sprint testing: 400m intervals at 1:51/500m (~78% PB)
+                            <a href="https://log.concept2.com/profile/2233883/log/113511844" class="c2-link">C2 ↗</a> → <strong style="color: #ffd700;">1000m Time Trial: 3:43.0 at 1:51.5/500m (~77% PB). SEASON PB!</strong>
+                            <a href="https://log.concept2.com/profile/2233883/log/113512304" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- WEEK 4: MAR 2–7 -->
+        <div class="week">
+            <h2>Week 4: Mar 2–7 (Cycle Week 2 + Open 26.2)</h2>
+            <table class="week-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Training</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="day-cell">Mon, Mar 2</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-strength">Strength</span>
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            <strong>Strength:</strong> Deadlift — heavy 3RM, back-off 70% × 2×6. Accessory: Supinated BB Row, Seesaw Press, Hanging Knee Raises.<br>
+                            <strong>Rowing:</strong> 10,000m steady at 2:33/500m (~31% PB), SR 22, HR avg 120 max 125. Under VT1. Pure aerobic base.
+                            <a href="https://log.concept2.com/profile/2233883/log/113569143" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Tue, Mar 3</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-crossfit">CrossFit</span>
+                        </td>
+                        <td class="description-cell">
+                            Front Squat 4×4 across. Pendlay Row 4×8-10. WOD: 5 Rds 2min AMRAP: 7 Pull-ups, 11 OHS, Cal Row. 1min rest.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Wed, Mar 4</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            20-min fixed-time at 2:32/500m (~32% PB), SR 23. Moderate steady state. 3,953m.
+                            <a href="https://log.concept2.com/profile/2233883/log/113625404" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Thu, Mar 5</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-strength">Strength</span>
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            <strong>Strength:</strong> Bench Press — heavy 3RM, back-off 70% × 2×6. Pullups 5×5-10. Accessory: RDL, Bulgarian Split Squat, Plank.<br>
+                            <strong>Rowing:</strong> Mixed — 12-min steady (1,931m at ~2:29/500m, HR 117), 4×500m at ~2:00/500m with 2:00 rest (~65% PB, HR 108→137, peak 161), 12-min endurance (2,453m, HR 124). 6,383m total. Threshold sandwich.
+                            <a href="https://log.concept2.com/profile/2233883/log/113725203" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Fri, Mar 6</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-open">CF Open 26.2</span>
+                        </td>
+                        <td class="description-cell">
+                            DB OH Lunges, Alt DB Snatches, Pull-ups → C2B → Ring Muscle-ups (15min cap).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Sat, Mar 7</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            Aerobic endurance: ~5×2000m with ~1:00 rest. 10,000m in 53:40 at 2:29/500m (~37–39% PB), SR 22, HR avg 130. Negative split — last rep fastest. Borderline Z2/tempo.
+                            <a href="https://log.concept2.com/profile/2233883/log/113778073" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- WEEK 5: MAR 9–14 -->
+        <div class="week">
+            <h2>Week 5: Mar 9–14 (Cycle Week 3 + Open 26.3)</h2>
+            <table class="week-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Training</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="day-cell">Mon, Mar 9</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-strength">Strength</span>
+                        </td>
+                        <td class="description-cell">
+                            Back Squat — heavy 3RM, back-off 70% × 2×6. Accessory: Pushups, DB Row, Side Bends.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Tue, Mar 10</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-crossfit">CrossFit</span>
+                        </td>
+                        <td class="description-cell">
+                            Front Squat 4×3 building. Bent Over BB Row 4×8-10. WOD: 12min AMRAP: 9 T2B, 18 Air Squats, 36 DU.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Wed, Mar 11</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            <strong>Big endurance:</strong> 5-min warm-up then 3×~4000m with ~1:30 rest. 13,001m in 1:11:44 at 2:24/500m (~38% PB), SR 21-22. HR 112→119 avg, max 130. All under VT1. Longest session of block.
+                            <a href="https://log.concept2.com/profile/2233883/log/113944996" class="c2-link">C2 ↗</a><br>
+                            Then: 12-min warm-up (1,878m, HR 104) → Threshold: 5×5:00 ON / 2:30 rest. Target 2:07/500m. Held 2:07–2:08 consistently (~55% PB), SR 29-31. HR 127→137 avg, peak 168 (just above VT2). Last interval fastest.
+                            <a href="https://log.concept2.com/profile/2233883/log/113995688" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Thu, Mar 12</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-strength">Strength</span>
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            <strong>Strength:</strong> Strict Press — heavy 3RM, back-off 70% × 2×6. Pullups 5×5-10. Accessory: Cyclist Squat, RDL, Plank.<br>
+                            <strong>Rowing:</strong> 5,000m steady at 2:25/500m (~37% PB), SR 22. Recovery volume.
+                            <a href="https://log.concept2.com/profile/2233883/log/114046458" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Fri, Mar 13</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-open">CF Open 26.3</span>
+                        </td>
+                        <td class="description-cell">
+                            2 Rds each at 95/115/135: 12 Burpees, 12 Cleans, 12 Burpees, 12 Thrusters (16min cap). Final Open workout!
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Sat, Mar 14</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            Endurance: ~5×2000m with ~1:00 rest. 10,000m in 51:24 at 2:22/500m (~39% PB), SR 23. Negative split.
+                            <a href="https://log.concept2.com/profile/2233883/log/114090300" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- WEEK 6: MAR 16–21 -->
+        <div class="week">
+            <h2>Week 6: Mar 16–21 (Cycle Week 4 — Current)</h2>
+            <table class="week-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Training</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="day-cell">Mon, Mar 16</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-strength">Strength</span>
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            <strong>Strength:</strong> Deadlift — build to 1RM, back-off 70% × 3×3. Accessory: Supinated BB Row, Seesaw Press, Hanging Knee Raises.<br>
+                            <strong>Rowing:</strong> 10-min warm-up (1,406m, HR 115) → Sprint power: 12×200m with 2:00 rest at ~1:46/500m (~85% PB), SR 34. HR climbed 93→166 (near VT2). Max-effort sprints. 2,400m total.
+                            <a href="https://log.concept2.com/profile/2233883/log/114200579" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Tue, Mar 17</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-crossfit">CrossFit</span>
+                        </td>
+                        <td class="description-cell">
+                            Front Squat 4×3 across. Bent Over BB Row 4×8-10. WOD: 5 Rds 2min AMRAP: 5 Hang Squat Snatch (95/65), 50 DU, T2B. 1min rest.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Wed, Mar 18</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                            <span class="activity-tag tag-open">Race Day</span>
+                        </td>
+                        <td class="description-cell">
+                            <strong>Threshold prep:</strong> ~6×1000m with ~3:00 rest. 6,000m in 40:49 at 2:09/500m (~53% PB), SR 26-27. Under target every rep.
+                            <a href="https://log.concept2.com/profile/2233883/log/114253888" class="c2-link">C2 ↗</a><br>
+                            Then: Sprint warm-up: 400m at 1:56/500m (~71% PB), SR 35 → <strong style="color: #f48fb1;">The Fibonacci — Erg Endurance Series 2026 RACE.</strong> 1000m/1000m/2000m/3000m with decreasing rest (3:00/2:00/1:00). 7,000m in 35:45 at 2:07 avg. HR avg 169 — above VT2 throughout. All-out competitive effort.
+                            <a href="https://log.concept2.com/profile/2233883/log/114308800" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Thu, Mar 19</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-strength">Strength</span>
+                        </td>
+                        <td class="description-cell">
+                            Bench Press — heavy 3RM, back-off 70% × 2×6. Pullups 5×5-10. Accessory: RDL, Bulgarian Split Squat, Plank.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Fri, Mar 20</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-crossfit">CrossFit</span>
+                        </td>
+                        <td class="description-cell">
+                            DB/KB Walking Lunge 3×8-10/side. Bench Press 3×8-10. WOD: 14min AMRAP: 3 Strict Pull-ups, 5 Push-ups, 7/5 Cal Row.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="day-cell">Sat, Mar 21</td>
+                        <td class="training-cell">
+                            <span class="activity-tag tag-rowing">Rowing</span>
+                        </td>
+                        <td class="description-cell">
+                            <strong>Sprint/threshold:</strong> 12-min warm-up (1,987m) → 2 sets of 10×40-sec ON / 20-sec OFF at ~1:57/500m. ~170m per rep, SR 30-32. 4:00 break between sets. 3,422m total.
+                            <a href="https://log.concept2.com/profile/2233883/log/114425329" class="c2-link">C2 ↗</a><br>
+                            Then: 10-min warm-up (2,105m, HR 121) → Threshold: 5×1500m with ~3:00 rest. Held 2:13→2:11 (negative split, ~49% PB), SR 26, HR 131→137 avg, peak 158. 7,500m total.
+                            <a href="https://log.concept2.com/profile/2233883/log/114457940" class="c2-link">C2 ↗</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- COACH NOTES -->
+        <div class="coach-notes">
+            <h2>Coach Notes</h2>
+            <p><strong>Athlete:</strong> Frances Angulo, DOB Nov 1984, Lightweight rower, ~128–130 lb, ~18% BF</p>
+            <p><strong>Rowing PRs:</strong> 500m PB 1:39.9 / 312W | 1000m PB 3:43.0 (set Feb 28) | 5K PB 20:54.7 | 1-min best 317m</p>
+            <p><strong>Strength PRs:</strong> BS 1RM 220 / 3RM 200 | FS 1RM 185 / 3RM 165 | DL 1RM 275 / 5RM 245 | BP 1RM 130 / 3RM 117.5</p>
+            <p><strong>Aerobic Zones:</strong> VT1 (aerobic threshold) = 132 BPM | VT2 (anaerobic threshold) = 167 BPM</p>
+            <p><strong>Race Profile:</strong> Events 100m–1000m sprints. Leg power = 75–80% of output. Strong aerobic base paired with explosive sprint capacity.</p>
+            <p><strong>Weekly Structure:</strong> 3 rowing sessions per week: (A) Sprint/Power, (B) Aerobic endurance (HR < VT1), (C) Threshold (HR 150–167). Paired with 2 CrossFit days and 2 strength days. Typical pattern: Mon = Strength + Sprint, Tue = CF, Wed = Rowing (threshold focus), Thu = Strength, Fri = CF, Sat = Endurance rowing, Sun = Rest.</p>
+            <p><strong>Z2 Note:</strong> Dedicated Zone 2 (HR < 132) was not frequent in this block. Most aerobic sessions drifted toward VT1 and above. Recommended approach: lower glycolytic pressure, prioritize true Z2 under 130 BPM for next macrocycle.</p>
+            <p><strong>Recent Milestones:</strong> Completed all 3 CF Open 26 WODs. Raced Erg Endurance Series "Fibonacci" on Mar 18 (1K/1K/2K/3K all-out, avg HR 169). 1000m season PB 3:43.0 on Feb 28. Currently in Cycle Week 4 deload phase with maintained intensity.</p>
+        </div>
+
+        <!-- EXAMPLES SECTION -->
+        <div class="examples">
+            <h2>Example Session Details with Heart Rate Zones</h2>
+
+            <!-- EXAMPLE 1 -->
+            <div class="example">
+                <h3>Example 1: Sprint Power — Mon Mar 16, 12×200m</h3>
+                <p><a href="https://log.concept2.com/profile/2233883/log/114200579" style="color: #00bcd4; text-decoration: none;">C2 Log #114200579</a></p>
+                <p><strong>12 × 200m with 2:00 rest at ~1:46/500m (~85% PB watts).</strong> Progressive cardiac drift from 93→149 avg HR. Explosive max-effort sprints with full recovery. Demonstrates Frances's capacity to rapidly elevate and sustain high heart rates in short intervals.</p>
+                <div class="chart-container">
+                    <svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="420" height="200" fill="#0f0f0f"/><line x1="30" y1="98" x2="410" y2="98" stroke="#81c784" stroke-dasharray="4,4" stroke-width="1" opacity="0.4"/><text x="10" y="102" font-size="10" fill="#81c784">VT1</text><line x1="30" y1="32" x2="410" y2="32" stroke="#f48fb1" stroke-dasharray="4,4" stroke-width="1" opacity="0.4"/><text x="10" y="36" font-size="10" fill="#f48fb1">VT2</text><text x="15" y="185" font-size="10" fill="#666">60</text><text x="15" y="110" font-size="10" fill="#666">130</text><text x="15" y="35" font-size="10" fill="#666">180</text><rect x="35" y="158" width="26" height="26" fill="#81c784"/><text x="42" y="192" font-size="9" fill="#999">93</text><rect x="63" y="64" width="26" height="120" fill="#ff9800"/><text x="68" y="192" font-size="9" fill="#999">142</text><rect x="91" y="85" width="26" height="99" fill="#81c784"/><text x="96" y="192" font-size="9" fill="#999">130</text><rect x="119" y="54" width="26" height="130" fill="#ff9800"/><text x="124" y="192" font-size="9" fill="#999">145</text><rect x="147" y="73" width="26" height="111" fill="#ff9800"/><text x="152" y="192" font-size="9" fill="#999">136</text><rect x="175" y="71" width="26" height="113" fill="#ff9800"/><text x="180" y="192" font-size="9" fill="#999">137</text><rect x="203" y="48" width="26" height="136" fill="#f48fb1"/><text x="208" y="192" font-size="9" fill="#999">148</text><rect x="231" y="67" width="26" height="117" fill="#ff9800"/><text x="236" y="192" font-size="9" fill="#999">138</text><rect x="259" y="32" width="26" height="152" fill="#f48fb1"/><text x="264" y="192" font-size="9" fill="#999">152</text><rect x="287" y="64" width="26" height="120" fill="#ff9800"/><text x="292" y="192" font-size="9" fill="#999">142</text><rect x="315" y="50" width="26" height="134" fill="#f48fb1"/><text x="320" y="192" font-size="9" fill="#999">146</text><rect x="343" y="44" width="26" height="140" fill="#f48fb1"/><text x="348" y="192" font-size="9" fill="#999">149</text><rect x="30" y="5" width="10" height="10" fill="#81c784"/><text x="45" y="13" font-size="9" fill="#ccc">Aerobic</text><rect x="130" y="5" width="10" height="10" fill="#ff9800"/><text x="145" y="13" font-size="9" fill="#ccc">Threshold</text><rect x="250" y="5" width="10" height="10" fill="#f48fb1"/><text x="265" y="13" font-size="9" fill="#ccc">Above VT2</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- EXAMPLE 2 -->
+            <div class="example">
+                <h3>Example 2: Threshold — Sat Mar 21, 5×1500m</h3>
+                <p><a href="https://log.concept2.com/profile/2233883/log/114457940" style="color: #00bcd4; text-decoration: none;">C2 Log #114457940</a></p>
+                <p><strong>5 × 1500m with 3:00 rest. Target pace 2:15/500m (~49% PB watts). Held 2:13→2:11 negative split.</strong> HR 131→137 avg, peak 158. Consistent threshold work with improving efficiency—last rep was fastest, indicating good aerobic power maintenance into fatigue.</p>
+                <div class="chart-container">
+                    <svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="420" height="200" fill="#0f0f0f"/><line x1="30" y1="108" x2="410" y2="108" stroke="#81c784" stroke-dasharray="4,4" stroke-width="1" opacity="0.4"/><text x="10" y="112" font-size="10" fill="#81c784">VT1</text><line x1="30" y1="20" x2="410" y2="20" stroke="#f48fb1" stroke-dasharray="4,4" stroke-width="1" opacity="0.4"/><text x="10" y="24" font-size="10" fill="#f48fb1">VT2</text><text x="15" y="185" font-size="10" fill="#666">60</text><text x="15" y="110" font-size="10" fill="#666">130</text><text x="15" y="35" font-size="10" fill="#666">180</text><rect x="60" y="104" width="50" height="80" fill="#ff9800"/><text x="77" y="192" font-size="9" fill="#999">131</text><text x="75" y="209" font-size="9" fill="#999">Rep 1</text><rect x="125" y="120" width="50" height="64" fill="#ff9800"/><text x="142" y="192" font-size="9" fill="#999">125</text><text x="140" y="209" font-size="9" fill="#999">Rep 2</text><rect x="190" y="100" width="50" height="84" fill="#ff9800"/><text x="207" y="192" font-size="9" fill="#999">133</text><text x="205" y="209" font-size="9" fill="#999">Rep 3</text><rect x="255" y="100" width="50" height="84" fill="#ff9800"/><text x="272" y="192" font-size="9" fill="#999">133</text><text x="270" y="209" font-size="9" fill="#999">Rep 4</text><rect x="320" y="92" width="50" height="92" fill="#ff9800"/><text x="337" y="192" font-size="9" fill="#999">137</text><text x="335" y="209" font-size="9" fill="#999">Rep 5</text><text x="77" y="20" font-size="9" fill="#00bcd4" font-weight="600">2:13</text><text x="142" y="20" font-size="9" fill="#00bcd4" font-weight="600">2:12.7</text><text x="207" y="20" font-size="9" fill="#00bcd4" font-weight="600">2:12.3</text><text x="272" y="20" font-size="9" fill="#00bcd4" font-weight="600">2:11.5</text><text x="337" y="20" font-size="9" fill="#00bcd4" font-weight="600">2:11</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- EXAMPLE 3 -->
+            <div class="example">
+                <h3>Example 3: Endurance — Mon Feb 23, 10K (1K + 4×2K + 1K)</h3>
+                <p><a href="https://log.concept2.com/profile/2233883/log/113250724" style="color: #00bcd4; text-decoration: none;">C2 Log #113250724</a></p>
+                <p><strong>1000m + 4×2000m + 1000m with ~1:00 rest at 2:24/500m (~38% PB watts).</strong> HR 59→130. Mostly under VT1. Pure aerobic base building—HR climbed steadily throughout, demonstrating progressive cardiac demand while maintaining sub-VT1 pace. 10,000m in 54:06.</p>
+                <div class="chart-container">
+                    <svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="420" height="200" fill="#0f0f0f"/><line x1="30" y1="94" x2="410" y2="94" stroke="#81c784" stroke-dasharray="4,4" stroke-width="1" opacity="0.4"/><text x="10" y="98" font-size="10" fill="#81c784">VT1</text><text x="15" y="185" font-size="10" fill="#666">50</text><text x="15" y="110" font-size="10" fill="#666">130</text><text x="15" y="35" font-size="10" fill="#666">180</text><rect x="45" y="153" width="45" height="31" fill="#81c784"/><text x="63" y="192" font-size="9" fill="#999">59</text><text x="57" y="209" font-size="9" fill="#999">1K WU</text><rect x="105" y="63" width="45" height="131" fill="#81c784"/><text x="123" y="192" font-size="9" fill="#999">113</text><text x="116" y="209" font-size="9" fill="#999">2K #1</text><rect x="165" y="39" width="45" height="155" fill="#81c784"/><text x="183" y="192" font-size="9" fill="#999">125</text><text x="176" y="209" font-size="9" fill="#999">2K #2</text><rect x="225" y="28" width="45" height="166" fill="#81c784"/><text x="243" y="192" font-size="9" fill="#999">128</text><text x="236" y="209" font-size="9" fill="#999">2K #3</text><rect x="285" y="20" width="45" height="174" fill="#81c784"/><text x="303" y="192" font-size="9" fill="#999">130</text><text x="296" y="209" font-size="9" fill="#999">2K #4</text><rect x="345" y="33" width="45" height="161" fill="#81c784"/><text x="363" y="192" font-size="9" fill="#999">127</text><text x="357" y="209" font-size="9" fill="#999">1K CD</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- EXAMPLE 4 -->
+            <div class="example">
+                <h3>Example 4: Race — Wed Mar 18, The Fibonacci (1K/1K/2K/3K)</h3>
+                <p><a href="https://log.concept2.com/profile/2233883/log/114308800" style="color: #00bcd4; text-decoration: none;">C2 Log #114308800</a></p>
+                <p><strong>1000m / 1000m / 2000m / 3000m with decreasing rest (3:00 / 2:00 / 1:00).</strong> All-out race, avg HR 169 (above VT2). Peak HR 177. Bar widths represent distance relative to total. Demonstrates Frances's ability to sustain maximum effort across a 7K total distance with minimal recovery.</p>
+                <div class="chart-container">
+                    <svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="420" height="200" fill="#0f0f0f"/><line x1="30" y1="108" x2="410" y2="108" stroke="#81c784" stroke-dasharray="4,4" stroke-width="1" opacity="0.4"/><text x="10" y="112" font-size="10" fill="#81c784">VT1</text><line x1="30" y1="20" x2="410" y2="20" stroke="#f48fb1" stroke-dasharray="4,4" stroke-width="1" opacity="0.4"/><text x="10" y="24" font-size="10" fill="#f48fb1">VT2</text><text x="15" y="185" font-size="10" fill="#666">60</text><text x="15" y="110" font-size="10" fill="#666">130</text><text x="15" y="35" font-size="10" fill="#666">180</text><rect x="35" y="54" width="40" height="130" fill="#ff9800"/><text x="45" y="192" font-size="9" fill="#999">154</text><text x="45" y="209" font-size="9" fill="#999">1K</text><rect x="80" y="32" width="40" height="152" fill="#f48fb1"/><text x="90" y="192" font-size="9" fill="#999">163</text><text x="90" y="209" font-size="9" fill="#999">1K</text><rect x="125" y="40" width="80" height="144" fill="#f48fb1"/><text x="160" y="192" font-size="9" fill="#999">161</text><text x="160" y="209" font-size="9" fill="#999">2K</text><rect x="210" y="16" width="120" height="168" fill="#f48fb1"/><text x="265" y="192" font-size="9" fill="#999">169</text><text x="265" y="209" font-size="9" fill="#999">3K</text><text x="35" y="12" font-size="8" fill="#ccc" font-style="italic">Bar width = relative distance</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>6-Week Training Lookback | Frances Angulo | Feb 9 – Mar 22, 2026</p>
+            <p style="margin-top: 12px; font-size: 0.8em;">
+                Rowing data via <a href="https://log.concept2.com">Concept2 Logbook</a> |
+                <span style="color: #666;">Built for coaching review</span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
